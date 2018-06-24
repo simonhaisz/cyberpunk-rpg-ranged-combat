@@ -1,6 +1,6 @@
 import { Calibers } from "./calibers";
 import { calcExternalBallistics } from "./external-ballistics";
-import { calcArmorPiercing } from "./terminal-ballistics";
+import { calcArmorPiercing, convertArmorPiercingToRating } from "./terminal-ballistics";
 
 const ranges: number[] = [
     0,
@@ -11,47 +11,60 @@ const ranges: number[] = [
     200,
     500,
     1000,
-    2000
+    2000,
+    5000
 ];
 
 type Pair = {
     a: number;
-    b: number;
+    b: string;
 };
 
 for (const caliber of Calibers) {
-    const muzzleVelocity = caliber.maxMuzzleVelocity;
-    const externalBallistics = calcExternalBallistics(caliber, caliber.maxMuzzleVelocity);
-    console.log(`${caliber.name}: ${muzzleVelocity}`);
-    let velocityOverDistance = "[";
-    let lastDistance = -1;
-    let lastVelocity = Number.MAX_VALUE;
-    let nextRangeIndex = 0;
-    const distanceVelocities = externalBallistics.getDistanceVelocities();
-    const rangeVelocities: Pair[] = [];
-    const rangeArmorPiercings: Pair[] = [];
-    for (const distance of distanceVelocities.keys()) {
-        const currentDistance = Math.floor(distance);
-        if (currentDistance <= lastDistance) {
-            continue;
+    for (const muzzleVelocity of caliber.muzzleVelocities) {
+        const externalBallistics = calcExternalBallistics(caliber, muzzleVelocity);
+        console.log(`${caliber.name}: ${muzzleVelocity}`);
+        let velocityOverDistance = "[";
+        let lastDistance = -1;
+        let lastVelocity = Number.MAX_VALUE;
+        let nextRangeIndex = 0;
+        const distanceVelocities = externalBallistics.getDistanceVelocities();
+        const rangeVelocities: Pair[] = [];
+        const rangeArmorPiercings: Pair[] = [];
+        const currentRangeVelocities: number[] = [];
+        const currentRangeArmorPiercies: number[] = [];
+        for (const distance of distanceVelocities.keys()) {
+            const currentDistance = Math.floor(distance);
+            const velocity = <number>distanceVelocities.get(distance);
+            const armorPiercing = calcArmorPiercing(caliber, velocity);
+            currentRangeVelocities.push(velocity);
+            currentRangeArmorPiercies.push(armorPiercing);
+            if (currentDistance <= lastDistance) {
+                continue;
+            }
+            if (currentDistance < ranges[nextRangeIndex]) {
+                continue;
+            }
+
+            const rangeVelocity = Math.floor(currentRangeVelocities.reduce((a, b) => a + b) / currentRangeVelocities.length);
+            const rangeArmorPiercing = currentRangeArmorPiercies.reduce((a, b) => a + b) / currentRangeArmorPiercies.length;
+            const currentVelocity = Math.ceil(velocity);
+            const currentArmorPiercing = convertArmorPiercingToRating(rangeArmorPiercing);
+
+            rangeVelocities.push({ a: currentDistance, b: `${currentVelocity}|${rangeVelocity}` });
+            rangeArmorPiercings.push({ a: currentDistance, b: `${currentArmorPiercing}` });
+            lastDistance = currentDistance;
+            lastVelocity = currentVelocity;
+            nextRangeIndex++;
+            currentRangeVelocities.length = 0;
+            currentRangeArmorPiercies.length = 0;
+            if (nextRangeIndex >= ranges.length) {
+                break;
+            }
         }
-        if (currentDistance < ranges[nextRangeIndex]) {
-            continue;
-        }
-        const velocity = <number>distanceVelocities.get(distance);
-        const currentVelocity = Math.ceil(velocity);
-        const currentArmorPiercing = calcArmorPiercing(caliber, currentVelocity);
-        rangeVelocities.push({ a: currentDistance, b: currentVelocity });
-        rangeArmorPiercings.push({ a: currentDistance, b: currentArmorPiercing });
-        lastDistance = currentDistance;
-        lastVelocity = currentVelocity;
-        nextRangeIndex++;
-        if (nextRangeIndex >= ranges.length) {
-            break;
-        }
+        console.log(`[${rangeVelocities.map(rv => `${rv.a}:${rv.b}`).join(", ")}]`);
+        console.log(`[${rangeArmorPiercings.map(rv => `${rv.a}:${rv.b}`).join(", ")}]`);
+        console.log();
     }
-    console.log(`[${rangeVelocities.map(rv => `${rv.a}:${rv.b}`).join(", ")}]`);
-    console.log(`[${rangeArmorPiercings.map(rv => `${rv.a}:${rv.b}`).join(", ")}]`);
-    console.log();
 }
 

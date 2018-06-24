@@ -1,4 +1,5 @@
 export enum CaliberType {
+    Shrapnel,
     Pistol,
     Rifle
 }
@@ -22,26 +23,21 @@ export class Caliber {
         this.mass = calcMass(size, sectionalDensity);
         this.maxMuzzleVelocity = maxMuzzleVelocity;
         this.muzzleVelocities = calcMuzzleVelocities(maxMuzzleVelocity);
-        this.dragCoefficient = type == CaliberType.Rifle ? 1 : 0.5;
-        this.sectionalArea = (convertInchesToMeters(size / 100) / 2) ^ 2 * Math.PI;
+        this.dragCoefficient = type == CaliberType.Rifle ? 1 : 5;
+        this.sectionalArea = Math.pow(convertInchesToMeters(size / 100) / 2, 2) * Math.PI;
     }
 }
 
 const calcMuzzleVelocities = (maxMuzzleVelocity: number): number[] => {
-    const muzzleVelocities: number[] = [maxMuzzleVelocity];
-    let currentVelocity = maxMuzzleVelocity;
-    for (let i = 0; i < 2; i++) {
-        currentVelocity = currentVelocity / Math.sqrt(2);
-        muzzleVelocities.push(Math.floor(currentVelocity));
-    }
-    if (muzzleVelocities.indexOf(250) === -1) {
-        muzzleVelocities.push(250);
-    }
-    return muzzleVelocities;
+    return [
+        maxMuzzleVelocity,
+        Math.floor(maxMuzzleVelocity / Math.sqrt(2)),
+        250
+    ];
 };
 
 const calcMass = (size: number, sectionalDensity: number): number => {
-    return (convertInchesToMeters(size / 100)) ^ 2 * sectionalDensity;
+    return Math.pow(convertInchesToMeters(size / 100), 2) * sectionalDensity;
 }
 
 const convertInchesToMeters = (inches: number): number => {

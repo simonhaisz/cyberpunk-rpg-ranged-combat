@@ -34,20 +34,18 @@ const calcDistanceVelocities = (caliber: Caliber, muzzleVelocity: number): Map<n
         currentDistance += currentVelocity * t;
         const force = calcForce(currentVelocity, caliber.dragCoefficient, caliber.sectionalArea);
         currentVelocity = calcDecceleration(currentVelocity, force, caliber.mass);
-        if (currentVelocity < 100) {
+        if (currentVelocity < 10) {
             break;
         }
-        //if (Math.ceil(currentVelocity) % 10 == 0) {
-            distanceVelocities.set(currentDistance, currentVelocity);
-        //}
+        distanceVelocities.set(currentDistance, currentVelocity);
     }
 
     return distanceVelocities;
 }
 
-const p = Math.E;
+const p = 0.003;
 const calcForce = (velocity: number, dragCoefficient: number, crossSectionalArea: number): number => {
-    return 0.5 * p * velocity ^ 2 * dragCoefficient * crossSectionalArea;
+    return 0.5 * p * Math.pow(velocity, 2) * dragCoefficient * crossSectionalArea;
 };
 
 const t = 0.001;

@@ -1,0 +1,12 @@
+{
+    "name": "shadowrun-ranged-combat",
+    "author": {
+        "name": "Simon Haisz"
+    },
+    "license": "MIT",
+    "version": "0.0.1",
+    "devDependencies": {
+        "typescript": "^2.9.2",
+        "@types/node": "^10.3.5"
+    }
+}

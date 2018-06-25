@@ -10,19 +10,17 @@ export class Caliber {
     readonly size: number;
     readonly sectionalDensity: number;
     readonly mass: number;
-    readonly maxMuzzleVelocity: number;
     readonly muzzleVelocities: number[];
     readonly dragCoefficient: number;
     readonly sectionalArea: number;
 
-    constructor(type: CaliberType, name: string, size: number, sectionalDensity: number, maxMuzzleVelocity: number) {
+    constructor(type: CaliberType, name: string, size: number, sectionalDensity: number, muzzleVelocities: number[]) {
         this.type = type;
         this.name = name;
         this.size = size;
         this.sectionalDensity = sectionalDensity;
         this.mass = calcMass(size, sectionalDensity);
-        this.maxMuzzleVelocity = maxMuzzleVelocity;
-        this.muzzleVelocities = calcMuzzleVelocities(maxMuzzleVelocity);
+        this.muzzleVelocities = muzzleVelocities;
         this.dragCoefficient = type == CaliberType.Rifle ? 1 : 5;
         this.sectionalArea = Math.pow(convertInchesToMeters(size / 100) / 2, 2) * Math.PI;
     }

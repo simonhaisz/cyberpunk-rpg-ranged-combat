@@ -4,6 +4,9 @@ import { calcArmorPiercing, convertArmorPiercingToRating } from "./terminal-ball
 
 const ranges: number[] = [
     0,
+    1,
+    2,
+    5,
     10,
     20,
     50,

@@ -21,18 +21,23 @@ export class Caliber {
         this.sectionalDensity = sectionalDensity;
         this.mass = calcMass(size, sectionalDensity);
         this.muzzleVelocities = muzzleVelocities;
-        this.dragCoefficient = type == CaliberType.Rifle ? 1 : 5;
+        this.dragCoefficient = getDragCoefficient(type);
         this.sectionalArea = Math.pow(convertInchesToMeters(size / 100) / 2, 2) * Math.PI;
     }
 }
 
-const calcMuzzleVelocities = (maxMuzzleVelocity: number): number[] => {
-    return [
-        maxMuzzleVelocity,
-        Math.floor(maxMuzzleVelocity / Math.sqrt(2)),
-        250
-    ];
-};
+const getDragCoefficient = (caliberType: CaliberType): number => {
+    switch (caliberType) {
+        case CaliberType.Rifle:
+            return 1;
+        case CaliberType.Pistol:
+            return 5;
+        case CaliberType.Shrapnel:
+            return 10;
+        default:
+            throw new Error(`Unknown caliber type ${caliberType}`);
+    }
+}
 
 const calcMass = (size: number, sectionalDensity: number): number => {
     return Math.pow(convertInchesToMeters(size / 100), 2) * sectionalDensity;

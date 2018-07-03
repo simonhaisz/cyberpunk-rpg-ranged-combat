@@ -18,9 +18,9 @@ const ranges: number[] = [
     5000
 ];
 
-type Pair = {
-    a: number;
-    b: string;
+type ReportValue = {
+    distance: number;
+    report: string;
 };
 
 for (const caliber of Calibers) {
@@ -31,17 +31,21 @@ for (const caliber of Calibers) {
         let lastDistance = -1;
         let lastVelocity = Number.MAX_VALUE;
         let nextRangeIndex = 0;
-        const distanceVelocities = externalBallistics.getDistanceVelocities();
-        const rangeVelocities: Pair[] = [];
-        const rangeArmorPiercings: Pair[] = [];
+        const ballistics = externalBallistics.getDistanceVelocities();
+        const rangeVelocities: ReportValue[] = [];
+        const rangeArmorPiercings: ReportValue[] = [];
+        const rangeTimes: ReportValue[] = [];
         const currentRangeVelocities: number[] = [];
         const currentRangeArmorPiercies: number[] = [];
-        for (const distance of distanceVelocities.keys()) {
-            const currentDistance = Math.floor(distance);
-            const velocity = <number>distanceVelocities.get(distance);
+        const currentRangeTimes: number[] = [];
+        for (const b of ballistics) {
+            const currentDistance = Math.floor(b.distance);
+            const velocity = b.velocity;
+            const time = b.time;
             const armorPiercing = calcArmorPiercing(caliber, velocity);
             currentRangeVelocities.push(velocity);
             currentRangeArmorPiercies.push(armorPiercing);
+            currentRangeTimes.push(time);
             if (currentDistance <= lastDistance) {
                 continue;
             }
@@ -51,11 +55,15 @@ for (const caliber of Calibers) {
 
             const rangeVelocity = Math.floor(currentRangeVelocities.reduce((a, b) => a + b) / currentRangeVelocities.length);
             const rangeArmorPiercing = currentRangeArmorPiercies.reduce((a, b) => a + b) / currentRangeArmorPiercies.length;
+            const rangeTime = currentRangeTimes.reduce((a, b) => a + b) / currentRangeTimes.length;
             const currentVelocity = Math.ceil(velocity);
-            const currentArmorPiercing = convertArmorPiercingToRating(rangeArmorPiercing);
+            const currentTime = Math.ceil(time * 100) / 100;
+            const effectiveArmorPiercing = convertArmorPiercingToRating(rangeArmorPiercing);
+            const effectiveTime = Math.ceil(rangeTime * 100) / 100;
 
-            rangeVelocities.push({ a: currentDistance, b: `${currentVelocity}|${rangeVelocity}` });
-            rangeArmorPiercings.push({ a: currentDistance, b: `${currentArmorPiercing}` });
+            rangeVelocities.push({ distance: currentDistance, report: `${currentVelocity}|${rangeVelocity}` });
+            rangeArmorPiercings.push({ distance: currentDistance, report: `${effectiveArmorPiercing}` });
+            rangeTimes.push({distance: currentDistance, report: `${currentTime}|${effectiveTime}`});
             lastDistance = currentDistance;
             lastVelocity = currentVelocity;
             nextRangeIndex++;
@@ -65,8 +73,9 @@ for (const caliber of Calibers) {
                 break;
             }
         }
-        console.log(`[${rangeVelocities.map(rv => `${rv.a}:${rv.b}`).join(", ")}]`);
-        console.log(`[${rangeArmorPiercings.map(rv => `${rv.a}:${rv.b}`).join(", ")}]`);
+        console.log(`[${rangeVelocities.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
+        console.log(`[${rangeArmorPiercings.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
+        console.log(`[${rangeTimes.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
         console.log();
     }
 }

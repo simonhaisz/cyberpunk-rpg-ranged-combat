@@ -1,9 +1,10 @@
 import { Caliber } from "./caliber";
+import { BallisticsData } from "./ballistics-data";
 
 export class ExternalBallistics {
     readonly caliber: Caliber;
     readonly muzzleVelocity: number;
-    private _distanceVelocities = new Map<number, number>();
+    private _ballistics: BallisticsData[] = [];
 
     constructor(caliber: Caliber, muzzleVelocity: number) {
         this.caliber = caliber;
@@ -11,11 +12,11 @@ export class ExternalBallistics {
     }
 
     calculate() {
-       this._distanceVelocities = calcDistanceVelocities(this.caliber, this.muzzleVelocity);
+       this._ballistics = calcDistanceVelocities(this.caliber, this.muzzleVelocity);
     }
 
-    getDistanceVelocities(): Map<number,number> {
-        return new Map<number,number>(this._distanceVelocities);
+    getDistanceVelocities(): BallisticsData[] {
+        return this._ballistics;
     }
 }
 
@@ -25,22 +26,23 @@ export const calcExternalBallistics = (caliber: Caliber, muzzleVelocity: number)
     return externalBallistics;
 };
 
-const calcDistanceVelocities = (caliber: Caliber, muzzleVelocity: number): Map<number,number> => {
-    const distanceVelocities = new Map<number,number>();
+const calcDistanceVelocities = (caliber: Caliber, muzzleVelocity: number): BallisticsData[] => {
+    const ballistics: BallisticsData[] = [];
+    ballistics.push(new BallisticsData(0, muzzleVelocity, 0));
     let currentDistance = 0;
     let currentVelocity = muzzleVelocity;
-    distanceVelocities.set(currentDistance, currentVelocity);
+    let currentTime = 0;
     while (true) {
         currentDistance += currentVelocity * t;
         const force = calcForce(currentVelocity, caliber.dragCoefficient, caliber.sectionalArea);
         currentVelocity = calcDecceleration(currentVelocity, force, caliber.mass);
+        currentTime += t;
         if (currentVelocity < 10) {
             break;
         }
-        distanceVelocities.set(currentDistance, currentVelocity);
+        ballistics.push(new BallisticsData(currentDistance, currentVelocity, currentTime));
     }
-
-    return distanceVelocities;
+    return ballistics;
 }
 
 const p = 0.003;

@@ -5,6 +5,13 @@
     },
     "license": "MIT",
     "version": "0.0.1",
+    "scripts": {
+        "ball": "node out/main bullets ball",
+        "ap": "node out/main bullets AP",
+        "apds": "node out/main bullets APDS",
+        "flechette": "node out/main flechettes",
+        "grenade": "node out/main grenades"
+    },
     "devDependencies": {
         "typescript": "^2.9.2",
         "@types/node": "^10.3.5"

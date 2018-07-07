@@ -1,13 +1,10 @@
 import { Calibers } from "./calibers";
 import { calcExternalBallistics } from "./external-ballistics";
-import { calcArmorPiercing, convertArmorPiercingToRating } from "./terminal-ballistics";
+import { calcArmorPiercing, convertArmorPiercingToRating, PiercingType } from "./terminal-ballistics";
+import { CaliberType, Caliber } from "./caliber";
 
-const ranges: number[] = [
-    0,
-    1,
-    2,
-    5,
-    10,
+let types: CaliberType[] = [CaliberType.Pistol, CaliberType.Rifle];
+let ranges: number[] = [
     20,
     50,
     100,
@@ -16,20 +13,59 @@ const ranges: number[] = [
     1000,
     2000,
     5000
-];
+]
+
+if (process.argv.length > 2) {
+    switch (process.argv[2]) {
+        case "bullets":
+            break;
+        case "flechettes":
+        types = [CaliberType.Flechette];
+            break;
+        case "grenades":
+            types = [CaliberType.Shrapnel];
+            ranges = [
+                0,
+                2,
+                5,
+                10,
+                20,
+                50
+            ]
+            break;
+    }
+}
+
+let apds = false;
+let piercing = PiercingType.Ball;
+if (process.argv.length > 3) {
+    switch (process.argv[3]) {
+        case "AP":
+            piercing = PiercingType.AP;
+            break;
+        case "APDS":
+            piercing = PiercingType.AP;
+            apds = true;
+            break;
+    }
+}
 
 type ReportValue = {
     distance: number;
     report: string;
 };
 
-for (const caliber of Calibers) {
+for (let caliber of Calibers) {
+    if (types.indexOf(caliber.type) === -1) {
+        continue;
+    }
+    if (apds) {
+        caliber = caliber.createApds();
+    }
     for (const muzzleVelocity of caliber.muzzleVelocities) {
         const externalBallistics = calcExternalBallistics(caliber, muzzleVelocity);
         console.log(`${caliber.name}: ${muzzleVelocity}`);
-        let velocityOverDistance = "[";
         let lastDistance = -1;
-        let lastVelocity = Number.MAX_VALUE;
         let nextRangeIndex = 0;
         const ballistics = externalBallistics.getDistanceVelocities();
         const rangeVelocities: ReportValue[] = [];
@@ -42,7 +78,7 @@ for (const caliber of Calibers) {
             const currentDistance = Math.floor(b.distance);
             const velocity = b.velocity;
             const time = b.time;
-            const armorPiercing = calcArmorPiercing(caliber, velocity);
+            const armorPiercing = calcArmorPiercing(caliber, velocity, piercing);
             currentRangeVelocities.push(velocity);
             currentRangeArmorPiercies.push(armorPiercing);
             currentRangeTimes.push(time);
@@ -65,7 +101,6 @@ for (const caliber of Calibers) {
             rangeArmorPiercings.push({ distance: currentDistance, report: `${effectiveArmorPiercing}` });
             rangeTimes.push({distance: currentDistance, report: `${currentTime}|${effectiveTime}`});
             lastDistance = currentDistance;
-            lastVelocity = currentVelocity;
             nextRangeIndex++;
             currentRangeVelocities.length = 0;
             currentRangeArmorPiercies.length = 0;

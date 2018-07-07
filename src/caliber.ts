@@ -1,5 +1,8 @@
+import { Calibers } from "./calibers";
+
 export enum CaliberType {
     Shrapnel,
+    Flechette,
     Pistol,
     Rifle
 }
@@ -24,12 +27,18 @@ export class Caliber {
         this.dragCoefficient = getDragCoefficient(type);
         this.sectionalArea = Math.pow(convertInchesToMeters(size / 100) / 2, 2) * Math.PI;
     }
+
+    createApds(): Caliber {
+        return new Caliber(this.type, `${this.name} (APDS)`, this.size / 2, this.sectionalDensity * 2, this.muzzleVelocities.map(v => v * Math.sqrt(2)));
+    }
 }
 
 const getDragCoefficient = (caliberType: CaliberType): number => {
     switch (caliberType) {
         case CaliberType.Rifle:
             return 1;
+        case CaliberType.Flechette:
+            return 2;
         case CaliberType.Pistol:
             return 5;
         case CaliberType.Shrapnel:

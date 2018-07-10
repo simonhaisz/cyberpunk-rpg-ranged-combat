@@ -10,7 +10,8 @@
         "ap": "node out/main bullets AP",
         "apds": "node out/main bullets APDS",
         "flechette": "node out/main flechettes",
-        "grenade": "node out/main grenades"
+        "grenade": "node out/main grenades",
+        "max-ranges": "node out/maximum-range"
     },
     "devDependencies": {
         "typescript": "^2.9.2",

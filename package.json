@@ -7,11 +7,13 @@
     "version": "0.0.1",
     "scripts": {
         "ball": "node out/main bullets ball",
-        "ap": "node out/main bullets AP",
-        "apds": "node out/main bullets APDS",
+        "ap": "node out/main bullets ap",
+        "apds": "node out/main bullets apds",
         "flechette": "node out/main flechettes",
         "grenade": "node out/main grenades",
-        "max-ranges": "node out/maximum-range"
+        "max-ranges": "node out/maximum-range",
+        "ball-reference": "node out/main bullets ball reference",
+        "ap-reference": "node out/main bullets ap reference"
     },
     "devDependencies": {
         "typescript": "^2.9.2",

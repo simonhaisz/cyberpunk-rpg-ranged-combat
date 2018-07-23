@@ -19,13 +19,8 @@ for (let i = 0; i < ranges.length - 1; i++) {
     const end = ranges[i+1];
 
     const splits: number[] = [];
-    let previous = start;
-    for (let j = 0; j < SPLIT_COUNT - 1; j++) {
-        const delta = end - previous;
-        previous += delta / 2;
-        splits.push(previous);
-    }
-    splits.push(end);
+    const delta = end - start;
+    splits.push(start + delta / 3, start + delta * 2 / 3, end);
 
     console.log(`${start}: [${splits.join(", ")}]`);
 }

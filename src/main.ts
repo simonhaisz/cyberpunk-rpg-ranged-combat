@@ -1,4 +1,4 @@
-import { Calibers } from "./calibers";
+import { Calibers, ReferenceCalibers } from "./calibers";
 import { calcExternalBallistics } from "./external-ballistics";
 import { calcArmorPiercing, convertArmorPiercingToRating, PiercingType } from "./terminal-ballistics";
 import { CaliberType, Caliber } from "./caliber";
@@ -40,12 +40,21 @@ let apds = false;
 let piercing = PiercingType.Ball;
 if (process.argv.length > 3) {
     switch (process.argv[3]) {
-        case "AP":
+        case "ap":
             piercing = PiercingType.AP;
             break;
-        case "APDS":
+        case "apds":
             piercing = PiercingType.AP;
             apds = true;
+            break;
+    }
+}
+
+let calibers = Calibers;
+if (process.argv.length > 4) {
+    switch(process.argv[4]) {
+        case "reference":
+            calibers = ReferenceCalibers;
             break;
     }
 }
@@ -55,7 +64,7 @@ type ReportValue = {
     report: string;
 };
 
-for (let caliber of Calibers) {
+for (let caliber of calibers) {
     if (types.indexOf(caliber.type) === -1) {
         continue;
     }

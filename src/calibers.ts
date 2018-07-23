@@ -1,33 +1,74 @@
 import { Caliber, CaliberType } from "./caliber";
 
-const Holdout = new Caliber(CaliberType.Pistol, "Hold-out", 35, 0.25, [500]);
-const Handgun = new Caliber(CaliberType.Pistol, "Hand-gun", 35, 0.5, [500]);
-const Handcannon = new Caliber(CaliberType.Pistol, "Hand-cannon", 50, 1, [500]);
-const Shotgun = new Caliber(CaliberType.Pistol, "Shotgun", 70, 1, [500]);
+const ONE_THOUSAND = 1000;
+const EIGHT_HUNDRED_SIXTY = ONE_THOUSAND / Math.sqrt(4/3);
+const SEVEN_HUNDRED = ONE_THOUSAND / Math.sqrt(2);
+const FIVE_HUNDRED = 500;
+const FOUR_HUNDRED_THIRTY = 500 / Math.sqrt(4/3);
+const THRE_HUNDED_FIFTY = FIVE_HUNDRED / Math.sqrt(2);
 
-const Buckshot = new Caliber(CaliberType.Pistol, "Bucketshot", 35, 0.25, [500]);
+const Pocketgun = new Caliber(CaliberType.Pistol, "Pocket-gun", 35, 0.5, [THRE_HUNDED_FIFTY]);
+const Holdout = new Caliber(CaliberType.Pistol, "Hold-out", 35, 0.5, [FOUR_HUNDRED_THIRTY]);
+const Handgun = new Caliber(CaliberType.Pistol, "Hand-gun", 35, 0.5, [FIVE_HUNDRED]);
+const Handcannon = new Caliber(CaliberType.Pistol, "Hand-cannon", 50, 1, [FIVE_HUNDRED]);
+const Shotgun = new Caliber(CaliberType.Pistol, "Shotgun", 70, 1, [FIVE_HUNDRED]);
 
-const Pdw = new Caliber(CaliberType.Rifle, "PDW", 25, 0.5, [1000]);
+const Buckshot = new Caliber(CaliberType.Pistol, "Bucketshot", 35, 0.25, [FIVE_HUNDRED]);
 
-const SportRifle = new Caliber(CaliberType.Rifle, "Sport-rifle", 25, 1, [1000]);
-const SniperRifle = new Caliber(CaliberType.Rifle, "Sniper-rifle", 35, 2, [1000]);
-const Cannon = new Caliber(CaliberType.Rifle, "Cannon", 50, 2, [1000]);
+const Pdw = new Caliber(CaliberType.Rifle, "PDW", 25, 1, [SEVEN_HUNDRED]);
+const Carbine = new Caliber(CaliberType.Rifle, "Carbine", 25, 1, [EIGHT_HUNDRED_SIXTY]);
+const Rifle = new Caliber(CaliberType.Rifle, "Rifle", 25, 1, [ONE_THOUSAND]);
+const AssaultCannon = new Caliber(CaliberType.Rifle, "Assault-cannon", 50, 2, [SEVEN_HUNDRED]);
+const SniperCannon = new Caliber(CaliberType.Rifle, "Sniper-cannon", 50, 2, [EIGHT_HUNDRED_SIXTY]);
+const AutoCannon = new Caliber(CaliberType.Rifle, "Auto-cannon", 50, 2, [ONE_THOUSAND]);
 
-const Flechette = new Caliber(CaliberType.Flechette, "Flechette", 12.5, 0.5, [1000, 500]);
+const Flechette = new Caliber(CaliberType.Flechette, "Flechette", 12.5, 0.5, [ONE_THOUSAND, FIVE_HUNDRED]);
 
-const Concussion = new Caliber(CaliberType.Shrapnel, "Concussion", 12.5, 0.125, [1000, 500]);
-const Fragmentation = new Caliber(CaliberType.Shrapnel, "Fragmentation", 12.5, 0.25, [1000, 500]);
+const Concussion = new Caliber(CaliberType.Shrapnel, "Concussion", 12.5, 0.125, [ONE_THOUSAND, FIVE_HUNDRED]);
+const Fragmentation = new Caliber(CaliberType.Shrapnel, "Fragmentation", 12.5, 0.25, [ONE_THOUSAND, FIVE_HUNDRED]);
+
+const TwentyTwo = new Caliber(CaliberType.Pistol, "22", 22.3, 0.52, [370]);
+const ThreeEighty = new Caliber(CaliberType.Pistol, "380", 3.55, 0.52, [300]);
+const Nine = new Caliber(CaliberType.Pistol, "9mm", 35.5, 0.63, [380]);
+const FortyFive = new Caliber(CaliberType.Pistol, "45", 45, 0.74, [290]);
+const ThreeFiftySeven = new Caliber(CaliberType.Pistol, "357", 3.57, 0.63, [440]);
+const FortyFour = new Caliber(CaliberType.Pistol, "44", 42.9, 0.85, [450]);
+const FiftyAE = new Caliber(CaliberType.Pistol, "50AE", 50, 0.76, [470]);
+const FiveSeven = new Caliber(CaliberType.Rifle, "FiveseveN", 22.4, 0.4, [720]);
+const FiveFiveSix = new Caliber(CaliberType.Rifle, "5.56mm", 22.4, 0.8, [950]);
+const SevenSixTwo = new Caliber(CaliberType.Rifle, "7.62mm", 30, 1.1, [830]);
+const ThreeThreeEight = new Caliber(CaliberType.Rifle, "338", 33.8, 1.42, [910]);
+const FiftyBMG = new Caliber(CaliberType.Rifle, "50BMG", 51, 1.6, [930]);
 
 export const Calibers: Caliber[] = [
+    Pocketgun,
     Holdout,
     Handgun,
     Handcannon,
-    // Buckshot,
+    Buckshot,
     // Shotgun,
     Flechette,
     Pdw,
-    SportRifle,
-    SniperRifle,
+    Carbine,
+    Rifle,
+    AssaultCannon,
+    SniperCannon,
+    AutoCannon,
     Concussion,
-    Fragmentation
+    Fragmentation,
+];
+
+export const ReferenceCalibers: Caliber[] = [
+    TwentyTwo,
+    ThreeEighty,
+    Nine,
+    FortyFive,
+    ThreeFiftySeven,
+    FortyFour,
+    FiftyAE,
+    FiveSeven,
+    FiveFiveSix,
+    SevenSixTwo,
+    ThreeThreeEight,
+    FiftyBMG
 ];

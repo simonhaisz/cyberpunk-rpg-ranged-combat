@@ -19,7 +19,7 @@ export const calcArmorPiercing = (caliber: Caliber, velocity: number, type: Pier
         default:
             throw new Error(`Unknown type ${type}`);
     }
-    return Math.sqrt(Math.pow(velocity, 2) * caliber.sectionalDensity) / density;
+    return velocity * caliber.sectionalDensity / density / 2;
 }
 
 export const convertArmorPiercingToRating = (armorPiercing: number): number => {

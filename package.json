@@ -16,7 +16,7 @@
         "ap-reference": "node out/main bullets ap reference"
     },
     "devDependencies": {
-        "typescript": "^2.9.2",
-        "@types/node": "^10.3.5"
+        "typescript": "2.9.2",
+        "@types/node": "10.3.5"
     }
 }

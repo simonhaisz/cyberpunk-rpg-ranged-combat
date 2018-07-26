@@ -47,6 +47,9 @@ if (process.argv.length > 3) {
             piercing = PiercingType.AP;
             apds = true;
             break;
+        case "hp":
+            piercing = PiercingType.HP;
+            break;
     }
 }
 
@@ -102,9 +105,9 @@ for (let caliber of calibers) {
             const rangeArmorPiercing = currentRangeArmorPiercies.reduce((a, b) => a + b) / currentRangeArmorPiercies.length;
             const rangeTime = currentRangeTimes.reduce((a, b) => a + b) / currentRangeTimes.length;
             const currentVelocity = Math.ceil(velocity);
-            const currentTime = Math.ceil(time * 100) / 100;
+            const currentTime = Math.ceil(time * 1000) / 1000;
             const effectiveArmorPiercing = convertArmorPiercingToRating(rangeArmorPiercing);
-            const effectiveTime = Math.ceil(rangeTime * 100) / 100;
+            const effectiveTime = Math.ceil(rangeTime * 1000) / 1000;
 
             rangeVelocities.push({ distance: currentDistance, report: `${currentVelocity}|${rangeVelocity}` });
             rangeArmorPiercings.push({ distance: currentDistance, report: `${effectiveArmorPiercing}` });

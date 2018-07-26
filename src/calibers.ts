@@ -13,7 +13,7 @@ const Handgun = new Caliber(CaliberType.Pistol, "Hand-gun", 35, 0.5, [FIVE_HUNDR
 const Handcannon = new Caliber(CaliberType.Pistol, "Hand-cannon", 50, 1, [FIVE_HUNDRED]);
 const Shotgun = new Caliber(CaliberType.Pistol, "Shotgun", 70, 1, [FIVE_HUNDRED]);
 
-const Buckshot = new Caliber(CaliberType.Pistol, "Bucketshot", 35, 0.25, [FIVE_HUNDRED]);
+const Buckshot = new Caliber(CaliberType.Pistol, "Buckshot", 35, 0.25, [FIVE_HUNDRED]);
 
 const Pdw = new Caliber(CaliberType.Rifle, "PDW", 25, 1, [SEVEN_HUNDRED]);
 const Carbine = new Caliber(CaliberType.Rifle, "Carbine", 25, 1, [EIGHT_HUNDRED_SIXTY]);

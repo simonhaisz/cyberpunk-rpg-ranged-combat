@@ -1,5 +1,3 @@
-import { Calibers } from "./calibers";
-
 export enum CaliberType {
     Shrapnel,
     Flechette,

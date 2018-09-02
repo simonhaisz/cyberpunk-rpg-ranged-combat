@@ -1,7 +1,7 @@
 import { Calibers, ReferenceCalibers } from "./calibers";
 import { calcExternalBallistics } from "./external-ballistics";
 import { calcArmorPiercing, convertArmorPiercingToRating, PiercingType } from "./terminal-ballistics";
-import { CaliberType, Caliber } from "./caliber";
+import { CaliberType } from "./caliber";
 
 let types: CaliberType[] = [CaliberType.Pistol, CaliberType.Rifle];
 let ranges: number[] = [
@@ -37,15 +37,14 @@ if (process.argv.length > 2) {
 }
 
 let apds = false;
-let piercing = PiercingType.Ball;
+let piercing = PiercingType.FMJ;
 if (process.argv.length > 3) {
     switch (process.argv[3]) {
-        case "ap":
-            piercing = PiercingType.AP;
+        case "tp":
+            piercing = PiercingType.TP;
             break;
-        case "apds":
-            piercing = PiercingType.AP;
-            apds = true;
+        case "du":
+            piercing = PiercingType.DU;
             break;
         case "hp":
             piercing = PiercingType.HP;

@@ -7,14 +7,14 @@
     "version": "0.0.1",
     "scripts": {
         "fmj": "node out/main bullets fmj",
-        "tp": "node out/main bullets tp",
+        "tap": "node out/main bullets tap",
         "du": "node out/main bullets du",
         "hp": "node out/main bullets hp",
         "flechette": "node out/main flechettes",
         "grenade": "node out/main grenades",
         "max-ranges": "node out/maximum-range",
-        "fmj-reference": "node out/main bullets fmj reference",
-        "tp-reference": "node out/main bullets tp reference"
+        "fmj-ref": "node out/main bullets fmj reference",
+        "tap-ref": "node out/main bullets tap reference"
     },
     "devDependencies": {
         "typescript": "2.9.2",

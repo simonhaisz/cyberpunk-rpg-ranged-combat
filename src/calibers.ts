@@ -5,9 +5,11 @@ const EIGHT_HUNDRED_SIXTY = ONE_THOUSAND / Math.sqrt(4/3);
 const SEVEN_HUNDRED = ONE_THOUSAND / Math.sqrt(2);
 const FIVE_HUNDRED = 500;
 const FOUR_HUNDRED_THIRTY = 500 / Math.sqrt(4/3);
-const THRE_HUNDED_FIFTY = FIVE_HUNDRED / Math.sqrt(2);
+const THREE_HUNDED_FIFTY = FIVE_HUNDRED / Math.sqrt(2);
+const THREE_HUNDRED = FIVE_HUNDRED / Math.sqrt(8/3);
+const TWO_HUNDRED_FIFTY = FIVE_HUNDRED / Math.sqrt(4);
 
-const Pocketgun = new Caliber(CaliberType.Pistol, "Pocket-gun", 35, 0.5, [THRE_HUNDED_FIFTY]);
+const Pocketgun = new Caliber(CaliberType.Pistol, "Pocket-gun", 35, 0.5, [THREE_HUNDED_FIFTY]);
 const Holdout = new Caliber(CaliberType.Pistol, "Hold-out", 35, 0.5, [FOUR_HUNDRED_THIRTY]);
 const Handgun = new Caliber(CaliberType.Pistol, "Hand-gun", 35, 0.5, [FIVE_HUNDRED]);
 const Handcannon = new Caliber(CaliberType.Pistol, "Hand-cannon", 50, 1, [FIVE_HUNDRED]);
@@ -22,7 +24,7 @@ const AssaultCannon = new Caliber(CaliberType.Rifle, "Assault-cannon", 50, 2, [S
 const SniperCannon = new Caliber(CaliberType.Rifle, "Sniper-cannon", 50, 2, [EIGHT_HUNDRED_SIXTY]);
 const AutoCannon = new Caliber(CaliberType.Rifle, "Auto-cannon", 50, 2, [ONE_THOUSAND]);
 
-const Flechette = new Caliber(CaliberType.Flechette, "Flechette", 12.5, 0.5, [ONE_THOUSAND, FIVE_HUNDRED]);
+const Flechette = new Caliber(CaliberType.Flechette, "Flechette", 12.5, 0.5, [ONE_THOUSAND, SEVEN_HUNDRED, FIVE_HUNDRED, THREE_HUNDED_FIFTY]);
 
 const Concussion = new Caliber(CaliberType.Shrapnel, "Concussion", 12.5, 0.125, [ONE_THOUSAND, FIVE_HUNDRED]);
 const Fragmentation = new Caliber(CaliberType.Shrapnel, "Fragmentation", 12.5, 0.25, [ONE_THOUSAND, FIVE_HUNDRED]);
@@ -42,17 +44,17 @@ const FiftyBMG = new Caliber(CaliberType.Rifle, "50BMG", 51, 1.6, [930]);
 
 export const Calibers: Caliber[] = [
     Pocketgun,
-    Holdout,
+    // Holdout,
     Handgun,
     Handcannon,
     Buckshot,
     // Shotgun,
     Flechette,
     Pdw,
-    Carbine,
+    // Carbine,
     Rifle,
     AssaultCannon,
-    SniperCannon,
+    // SniperCannon,
     AutoCannon,
     Concussion,
     Fragmentation,

@@ -3,7 +3,7 @@ import { Caliber } from "./caliber";
 export enum PiercingType {
     HP,
     FMJ,
-    TP,
+    TAP,
     DU
 }
 
@@ -20,7 +20,7 @@ export const calcArmorPiercing = (caliber: Caliber, velocity: number, type: Pier
         case PiercingType.FMJ:
             density = FULL_METAL_JACKET;
             break;
-        case PiercingType.TP:
+        case PiercingType.TAP:
             density = TUNGSTEN_PENERATOR;
             break;
         case PiercingType.DU:
@@ -36,5 +36,5 @@ export const convertArmorPiercingToRating = (armorPiercing: number): number => {
     if (armorPiercing >= 1) {
         return Math.round(armorPiercing);
     }
-    return -Math.floor((1 / armorPiercing) - 1);
+    return -Math.round((1 / armorPiercing) - 1);
 }

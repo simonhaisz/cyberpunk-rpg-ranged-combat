@@ -20,7 +20,7 @@ if (process.argv.length > 2) {
         case "bullets":
             break;
         case "flechettes":
-        types = [CaliberType.Flechette];
+            types = [CaliberType.Flechette];
             break;
         case "grenades":
             types = [CaliberType.Shrapnel];
@@ -40,8 +40,8 @@ let apds = false;
 let piercing = PiercingType.FMJ;
 if (process.argv.length > 3) {
     switch (process.argv[3]) {
-        case "tp":
-            piercing = PiercingType.TP;
+        case "tap":
+            piercing = PiercingType.TAP;
             break;
         case "du":
             piercing = PiercingType.DU;
@@ -81,6 +81,7 @@ for (let caliber of calibers) {
         const ballistics = externalBallistics.getDistanceVelocities();
         const rangeVelocities: ReportValue[] = [];
         const rangeArmorPiercings: ReportValue[] = [];
+        const rangeArmorPiercingRatings: ReportValue[] = [];
         const rangeTimes: ReportValue[] = [];
         const currentRangeVelocities: number[] = [];
         const currentRangeArmorPiercies: number[] = [];
@@ -109,7 +110,8 @@ for (let caliber of calibers) {
             const effectiveTime = Math.ceil(rangeTime * 1000) / 1000;
 
             rangeVelocities.push({ distance: currentDistance, report: `${currentVelocity}|${rangeVelocity}` });
-            rangeArmorPiercings.push({ distance: currentDistance, report: `${effectiveArmorPiercing}` });
+            rangeArmorPiercings.push({ distance: currentDistance, report: `${rangeArmorPiercing}`})
+            rangeArmorPiercingRatings.push({ distance: currentDistance, report: `${effectiveArmorPiercing}` });
             rangeTimes.push({distance: currentDistance, report: `${currentTime}|${effectiveTime}`});
             lastDistance = currentDistance;
             nextRangeIndex++;
@@ -119,9 +121,10 @@ for (let caliber of calibers) {
                 break;
             }
         }
-        console.log(`[${rangeVelocities.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
-        console.log(`[${rangeArmorPiercings.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
-        console.log(`[${rangeTimes.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
+        console.log(`V   [${rangeVelocities.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
+        console.log(`AP# [${rangeArmorPiercings.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
+        console.log(`APR [${rangeArmorPiercingRatings.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
+        console.log(`T   [${rangeTimes.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
         console.log();
     }
 }

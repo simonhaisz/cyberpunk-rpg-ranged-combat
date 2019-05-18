@@ -1,12 +1,14 @@
 import { Caliber } from "./caliber";
 
 export enum PiercingType {
+    GEL,
     HP,
     FMJ,
     TAP,
     DU
 }
 
+const GEL = 500;
 const HOLLOW_POINT = 200;
 const FULL_METAL_JACKET = 100;
 const TUNGSTEN_PENERATOR = 100 / Math.sqrt(2);
@@ -14,6 +16,9 @@ const DEPLETED_URANIUM = 50;
 export const calcArmorPiercing = (caliber: Caliber, velocity: number, type: PiercingType): number => {
     let density: number;
     switch (type) {
+        case PiercingType.GEL:
+            density = GEL;
+            break;
         case PiercingType.HP:
             density = HOLLOW_POINT;
             break;

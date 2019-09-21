@@ -11,7 +11,7 @@
         "du": "node out/main bullets du",
         "hp": "node out/main bullets hp",
         "gel": "node out/main bullets gel",
-        "flechette": "node out/main flechettes",
+        "flechette": "node out/main flechettes du",
         "grenade": "node out/main grenades",
         "max-ranges": "node out/maximum-range",
         "fmj-ref": "node out/main bullets fmj reference",

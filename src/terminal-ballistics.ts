@@ -37,9 +37,8 @@ export const calcArmorPiercing = (caliber: Caliber, velocity: number, type: Pier
     return velocity * caliber.sectionalDensity / density / 2;
 }
 
+const AP_ORIGIN = 1.25;
 export const convertArmorPiercingToRating = (armorPiercing: number): number => {
-    if (armorPiercing >= 1) {
-        return Math.round(armorPiercing);
-    }
-    return -Math.round((1 / armorPiercing) - 1);
+    const apStart = armorPiercing / AP_ORIGIN;
+    return Math.round(Math.log2(apStart) * 2);
 }

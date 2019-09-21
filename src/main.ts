@@ -5,6 +5,8 @@ import { CaliberType } from "./caliber";
 
 let types: CaliberType[] = [CaliberType.Pistol, CaliberType.Rifle];
 let ranges: number[] = [
+    5,
+    10,
     20,
     50,
     100,

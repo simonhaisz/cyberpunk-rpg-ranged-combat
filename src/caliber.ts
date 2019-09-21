@@ -35,9 +35,9 @@ const getDragCoefficient = (caliberType: CaliberType): number => {
     switch (caliberType) {
         case CaliberType.Rifle:
             return 1;
-        case CaliberType.Flechette:
-            return 2;
         case CaliberType.Pistol:
+            return 2;
+        case CaliberType.Flechette:
             return 5;
         case CaliberType.Shrapnel:
             return 10;

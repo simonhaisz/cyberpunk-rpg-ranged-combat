@@ -18,12 +18,16 @@ const Shotgun = new Caliber(CaliberType.Pistol, "Shotgun", 70, 1, [FIVE_HUNDRED]
 const Buckshot = new Caliber(CaliberType.Pistol, "Buckshot", 35, 0.25, [FIVE_HUNDRED]);
 const Flechette = new Caliber(CaliberType.Flechette, "Flechette", 12.5, 0.25, [ONE_THOUSAND, SEVEN_HUNDRED, FIVE_HUNDRED, THREE_HUNDED_FIFTY]);
 
-const Pdw = new Caliber(CaliberType.Rifle, "Carbine", 25, 1, [SEVEN_HUNDRED]);
+const Pdw = new Caliber(CaliberType.Rifle, "PDW", 25, 1, [SEVEN_HUNDRED]);
 const Carbine = new Caliber(CaliberType.Rifle, "Carbine", 25, 1, [EIGHT_HUNDRED_SIXTY]);
 const Rifle = new Caliber(CaliberType.Rifle, "Rifle", 25, 1, [ONE_THOUSAND]);
 const AssaultCannon = new Caliber(CaliberType.Rifle, "Assault-cannon", 50, 2, [SEVEN_HUNDRED]);
 const SniperCannon = new Caliber(CaliberType.Rifle, "Sniper-cannon", 50, 2, [EIGHT_HUNDRED_SIXTY]);
 const Cannon = new Caliber(CaliberType.Rifle, "Cannon", 50, 2, [ONE_THOUSAND]);
+
+const SubSonicPistol = new Caliber(CaliberType.Pistol, "Sub-sonic Pistol", 35, 0.5, [TWO_HUNDRED_FIFTY]);
+const SubSonicRifle = new Caliber(CaliberType.Rifle, "Sub-sonic Rifle", 25, 1, [TWO_HUNDRED_FIFTY]);
+const SubSonicCannon = new Caliber(CaliberType.Rifle, "Sub-sonic Cannon", 50, 2, [TWO_HUNDRED_FIFTY]);
 
 const Concussion = new Caliber(CaliberType.Shrapnel, "Concussion", 12.5, 0.125, [ONE_THOUSAND, FIVE_HUNDRED]);
 const Fragmentation = new Caliber(CaliberType.Shrapnel, "Fragmentation", 12.5, 0.25, [ONE_THOUSAND, FIVE_HUNDRED]);
@@ -53,11 +57,14 @@ export const Calibers: Caliber[] = [
     Pdw,
     // Carbine,
     Rifle,
-    // AssaultCannon,
+    AssaultCannon,
     // SniperCannon,
     Cannon,
     Concussion,
     Fragmentation,
+    SubSonicPistol,
+    SubSonicRifle,
+    SubSonicCannon
 ];
 
 export const ReferenceCalibers: Caliber[] = [

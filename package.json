@@ -4,8 +4,11 @@
         "name": "Simon Haisz"
     },
     "license": "MIT",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "scripts": {
+        "build": "tsc",
+        "clean": "rimraf -rf out",
+        "start": "yarn run fmj",
         "fmj": "node out/main bullets fmj",
         "tap": "node out/main bullets tap",
         "du": "node out/main bullets du",
@@ -18,7 +21,8 @@
         "tap-ref": "node out/main bullets tap reference"
     },
     "devDependencies": {
-        "typescript": "2.9.2",
-        "@types/node": "10.3.5"
+        "@types/node": "12.7.12",
+        "rimraf": "2.6.3",
+        "typescript": "3.6.4"
     }
 }

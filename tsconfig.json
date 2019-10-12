@@ -2,12 +2,14 @@
     "compilerOptions": {
         "alwaysStrict": true,
         "lib": [
-            "es2017"
+            "es2019"
         ],
-        "target": "es5",
+        "target": "es6",
         "strict": true,
         "sourceMap": true,
         "downlevelIteration": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
         "outDir": "./out"
     },
     "include": [

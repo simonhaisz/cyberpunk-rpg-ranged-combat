@@ -8,7 +8,7 @@
     "scripts": {
         "build": "tsc",
         "clean": "rimraf -rf out",
-        "start": "yarn run fmj",
+        "start": "node out/main ",
         "fmj": "node out/main bullets fmj",
         "tap": "node out/main bullets tap",
         "du": "node out/main bullets du",
@@ -21,8 +21,13 @@
         "tap-ref": "node out/main bullets tap reference"
     },
     "devDependencies": {
+        "@types/fs-extra": "^9.0.1",
         "@types/node": "12.7.12",
         "rimraf": "2.6.3",
         "typescript": "3.6.4"
+    },
+    "dependencies": {
+        "commander": "^6.1.0",
+        "fs-extra": "^9.0.1"
     }
 }

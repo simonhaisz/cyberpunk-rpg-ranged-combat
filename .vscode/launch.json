@@ -9,9 +9,13 @@
             "request": "launch",
             "name": "Run Guns (Standard)",
             "program": "${workspaceFolder}/src/main.ts",
-            "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"
+            ],
+            "args": [
+                "--output-file",
+                "--ranges",
+                "reference"
             ]
         },
         {
@@ -19,7 +23,6 @@
             "request": "launch",
             "name": "Run Grenades",
             "program": "${workspaceFolder}/src/main.ts",
-            "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"
             ],

@@ -47,14 +47,14 @@ const ThreeThreeEight = new Caliber(CaliberType.Rifle, "338", 33.8, 1.42, [910])
 const FiftyBMG = new Caliber(CaliberType.Rifle, "50BMG", 51, 1.6, [930]);
 
 export const Calibers: Caliber[] = [
-    Pocketgun,
+    // Pocketgun,
     // Holdout,
     Handgun,
     Handcannon,
     Buckshot,
     // Shotgun,
     Flechette,
-    Pdw,
+    // Pdw,
     // Carbine,
     Rifle,
     AssaultCannon,
@@ -62,9 +62,9 @@ export const Calibers: Caliber[] = [
     Cannon,
     Concussion,
     Fragmentation,
-    SubSonicPistol,
-    SubSonicRifle,
-    SubSonicCannon
+    // SubSonicPistol,
+    // SubSonicRifle,
+    // SubSonicCannon
 ];
 
 export const ReferenceCalibers: Caliber[] = [

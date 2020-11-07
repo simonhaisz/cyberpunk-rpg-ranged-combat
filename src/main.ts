@@ -27,6 +27,15 @@ let gameRanges: number[] = [
     5000
 ];
 
+for (let i = 0; i < gameRanges.length - 1; i++) {
+    const currentRange = gameRanges[i];
+    const nextRange = gameRanges[i+1];
+    // once we get to 100 pad out the ranges to include every instance of 100
+    if (nextRange - currentRange > 100) {
+        gameRanges.splice(i+1, 0, currentRange + 100);
+    }
+}
+
 let referenceRanges: number[] = [];
 for (let i = 1; i < 500; i++) {
     referenceRanges.push(i * 10);
@@ -147,6 +156,9 @@ for (let caliber of calibers) {
             currentRangeVelocities.push(velocity);
             currentRangeArmorPiercies.push(armorPiercing);
             currentRangeTimes.push(time);
+            if (velocity < 200) {
+                break;
+            }
             if (currentDistance <= lastDistance) {
                 continue;
             }

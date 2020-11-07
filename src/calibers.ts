@@ -9,25 +9,17 @@ const THREE_HUNDED_FIFTY = FIVE_HUNDRED / Math.sqrt(2);
 const THREE_HUNDRED = FIVE_HUNDRED / Math.sqrt(8/3);
 const TWO_HUNDRED_FIFTY = FIVE_HUNDRED / Math.sqrt(4);
 
-const Pocketgun = new Caliber(CaliberType.Pistol, "Pocket-gun", 35, 0.5, [THREE_HUNDED_FIFTY]);
-const Holdout = new Caliber(CaliberType.Pistol, "Hold-out", 35, 0.5, [FOUR_HUNDRED_THIRTY]);
-const Handgun = new Caliber(CaliberType.Pistol, "Hand-gun", 35, 0.5, [FIVE_HUNDRED]);
-const Handcannon = new Caliber(CaliberType.Pistol, "Hand-cannon", 50, 1, [FIVE_HUNDRED]);
-const Shotgun = new Caliber(CaliberType.Pistol, "Shotgun", 70, 1, [FIVE_HUNDRED]);
+const Handgun = new Caliber(CaliberType.Pistol, "Hand-gun", 40, 1, [FIVE_HUNDRED]);
+const Handcannon = new Caliber(CaliberType.Pistol, "Hand-cannon", 50, 1.41, [FIVE_HUNDRED]);
+
+const LightRifle = new Caliber(CaliberType.Rifle, "Light Rifle", 20, 0.707, [ONE_THOUSAND]);
+const HeavyRifle = new Caliber(CaliberType.Rifle, "Heavy Rifle", 30, 1, [ONE_THOUSAND]);
+
+const LightCannon = new Caliber(CaliberType.Rifle, "Light Cannon", 40, 1.41, [ONE_THOUSAND]);
+const HeavyCannon = new Caliber(CaliberType.Rifle, "Heavy Cannon", 50, 2, [ONE_THOUSAND]);
 
 const Buckshot = new Caliber(CaliberType.Pistol, "Buckshot", 35, 0.25, [FIVE_HUNDRED]);
-const Flechette = new Caliber(CaliberType.Flechette, "Flechette", 12.5, 0.25, [ONE_THOUSAND, SEVEN_HUNDRED, FIVE_HUNDRED, THREE_HUNDED_FIFTY]);
-
-const Pdw = new Caliber(CaliberType.Rifle, "PDW", 25, 1, [SEVEN_HUNDRED]);
-const Carbine = new Caliber(CaliberType.Rifle, "Carbine", 25, 1, [EIGHT_HUNDRED_SIXTY]);
-const Rifle = new Caliber(CaliberType.Rifle, "Rifle", 25, 1, [ONE_THOUSAND]);
-const AssaultCannon = new Caliber(CaliberType.Rifle, "Assault-cannon", 50, 2, [SEVEN_HUNDRED]);
-const SniperCannon = new Caliber(CaliberType.Rifle, "Sniper-cannon", 50, 2, [EIGHT_HUNDRED_SIXTY]);
-const Cannon = new Caliber(CaliberType.Rifle, "Cannon", 50, 2, [ONE_THOUSAND]);
-
-const SubSonicPistol = new Caliber(CaliberType.Pistol, "Sub-sonic Pistol", 35, 0.5, [TWO_HUNDRED_FIFTY]);
-const SubSonicRifle = new Caliber(CaliberType.Rifle, "Sub-sonic Rifle", 25, 1, [TWO_HUNDRED_FIFTY]);
-const SubSonicCannon = new Caliber(CaliberType.Rifle, "Sub-sonic Cannon", 50, 2, [TWO_HUNDRED_FIFTY]);
+const Flechette = new Caliber(CaliberType.Flechette, "Flechette", 10, 0.25, [ONE_THOUSAND, FIVE_HUNDRED]);
 
 const Concussion = new Caliber(CaliberType.Shrapnel, "Concussion", 12.5, 0.125, [ONE_THOUSAND, FIVE_HUNDRED]);
 const Fragmentation = new Caliber(CaliberType.Shrapnel, "Fragmentation", 12.5, 0.25, [ONE_THOUSAND, FIVE_HUNDRED]);
@@ -47,24 +39,16 @@ const ThreeThreeEight = new Caliber(CaliberType.Rifle, "338", 33.8, 1.42, [910])
 const FiftyBMG = new Caliber(CaliberType.Rifle, "50BMG", 51, 1.6, [930]);
 
 export const Calibers: Caliber[] = [
-    // Pocketgun,
-    // Holdout,
     Handgun,
     Handcannon,
+    LightRifle,
+    HeavyRifle,
+    LightCannon,
+    HeavyCannon,
     Buckshot,
-    // Shotgun,
     Flechette,
-    // Pdw,
-    // Carbine,
-    Rifle,
-    AssaultCannon,
-    // SniperCannon,
-    Cannon,
     Concussion,
     Fragmentation,
-    // SubSonicPistol,
-    // SubSonicRifle,
-    // SubSonicCannon
 ];
 
 export const ReferenceCalibers: Caliber[] = [

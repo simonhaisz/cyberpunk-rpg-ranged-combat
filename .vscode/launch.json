@@ -13,9 +13,10 @@
                 "${workspaceFolder}/out/**/*.js"
             ],
             "args": [
-                "--output-file",
-                "--ranges",
-                "reference"
+                "--type",
+                "bullets",
+                "--piercing",
+                "fmj"
             ]
         },
         {

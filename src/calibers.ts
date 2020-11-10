@@ -9,8 +9,8 @@ const THREE_HUNDED_FIFTY = FIVE_HUNDRED / Math.sqrt(2);
 const THREE_HUNDRED = FIVE_HUNDRED / Math.sqrt(8/3);
 const TWO_HUNDRED_FIFTY = FIVE_HUNDRED / Math.sqrt(4);
 
-const Handgun = new Caliber(CaliberType.Pistol, "Hand-gun", 40, 1, [FIVE_HUNDRED]);
-const Handcannon = new Caliber(CaliberType.Pistol, "Hand-cannon", 50, 1.41, [FIVE_HUNDRED]);
+const Handgun = new Caliber(CaliberType.Pistol, "Hand-gun", 40, 0.707, [FIVE_HUNDRED]);
+const Handcannon = new Caliber(CaliberType.Pistol, "Hand-cannon", 50, 1, [FIVE_HUNDRED]);
 
 const LightRifle = new Caliber(CaliberType.Rifle, "Light Rifle", 20, 0.707, [ONE_THOUSAND]);
 const HeavyRifle = new Caliber(CaliberType.Rifle, "Heavy Rifle", 30, 1, [ONE_THOUSAND]);

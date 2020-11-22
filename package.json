@@ -6,7 +6,7 @@
     "license": "MIT",
     "version": "0.1.0",
     "scripts": {
-        "build": "tsc",
+        "build": "tsc -b",
         "clean": "rimraf -rf out",
         "start": "node out/main ",
         "fmj": "node out/main --type bullets --piercing fmj",
@@ -18,7 +18,8 @@
         "grenade": "node out/main grenades",
         "max-ranges": "node out/maximum-range",
         "fmj-ref": "node out/main bullets fmj reference",
-        "tap-ref": "node out/main bullets tap reference"
+        "tap-ref": "node out/main bullets tap reference",
+        "accuracy": "node out/accuracy"
     },
     "devDependencies": {
         "@types/fs-extra": "^9.0.1",

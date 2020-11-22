@@ -134,24 +134,22 @@ for (let caliber of calibers) {
         const externalBallistics = calcExternalBallistics(caliber, muzzleVelocity);
         console.log(`${caliber.name}: ${muzzleVelocity}`);
         let lastDistance = -1;
-        let nextRangeIndex = 0;
         const ballistics = externalBallistics.getDistanceVelocities();
         const velocities: number[] = [];
         const armorPiercings: number[] = [];
         const times: number[] = [];
+        const drifts: number[] = [];
 
         const rangeVelocities: ReportValue[] = [];
-        const rangeArmorPiercings: ReportValue[] = [];
         const rangeArmorPiercingRatings: ReportValue[] = [];
         const rangeTimes: ReportValue[] = [];
+        const rangeDrifts: ReportValue[] = [];
 
-        const currentRangeVelocities: number[] = [];
-        const currentRangeArmorPiercies: number[] = [];
-        const currentRangeTimes: number[] = [];
         for (const b of ballistics) {
             const currentDistance = Math.floor(b.distance);
             const velocity = round(b.velocity, 50, true);
             const time = round(b.time, 0.1, false);
+            const drift = round(Math.pow(b.time, 2), 0.1, false);
             const armorPiercing = convertArmorPiercingToRating(calcArmorPiercing(caliber, velocity, piercing));
             if (velocity < 200) {
                 break;
@@ -169,41 +167,15 @@ for (let caliber of calibers) {
             if (addIfDifferent(times, time)) {
                 rangeTimes.push({ distance: currentDistance, report: `${time.toFixed(2)}`});
             }
-            /*
-            currentRangeVelocities.push(velocity);
-            currentRangeArmorPiercies.push(armorPiercing);
-            currentRangeTimes.push(time);
-            velocities.push(velocity);
-            armorPiercings.push(armorPiercing);
-            times.push(time);
-
-            const averageVelocity = Math.floor(currentRangeVelocities.reduce((a, b) => a + b) / currentRangeVelocities.length);
-            rangeVelocities.push({ distance: currentDistance, report: `${averageVelocity}` });
-
-            const rangeTime = currentRangeTimes.reduce((a, b) => a + b) / currentRangeTimes.length;
-            const effectiveTime = Math.ceil(rangeTime * 1000) / 1000;
-            rangeTimes.push({distance: currentDistance, report: `${effectiveTime}`});
-
-            rangeArmorPiercings.push({ distance: currentDistance, report: `${armorPiercing.toFixed(2)}` });
-
-            const rangeArmorPiercing = currentRangeArmorPiercies.reduce((a, b) => a + b) / currentRangeArmorPiercies.length;
-            const effectiveArmorPiercing = convertArmorPiercingToRating(rangeArmorPiercing);
-            rangeArmorPiercings.push({ distance: currentDistance, report: `${rangeArmorPiercing.toFixed(2)}`})
-            rangeArmorPiercingRatings.push({ distance: currentDistance, report: `${effectiveArmorPiercing}` });
-
-            lastDistance = currentDistance;
-            nextRangeIndex++;
-            currentRangeVelocities.length = 0;
-            currentRangeArmorPiercies.length = 0;
-            if (nextRangeIndex >= ranges.length) {
-                break;
+            if (addIfDifferent(drifts, drift)) {
+                rangeDrifts.push({ distance: currentDistance, report: `${drift.toFixed(2)}`});
             }
-            */
         }
         console.log(`V   [${rangeVelocities.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
         //console.log(`AP# [${rangeArmorPiercings.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
-        console.log(`APR [${rangeArmorPiercingRatings.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
-        console.log(`T   [${rangeTimes.map(rv => `${rv.distance}:${rv.report}`).join(", ")}]`);
+        console.log(`APR [${rangeArmorPiercingRatings.map(ra => `${ra.distance}:${ra.report}`).join(", ")}]`);
+        console.log(`T   [${rangeTimes.map(rt => `${rt.distance}:${rt.report}`).join(", ")}]`);
+        // console.log(`D   [${rangeDrifts.map(rd => `${rd.distance}:${rd.report}`).join(", ")}]`);
         console.log();
 
         if (outputFile) {
